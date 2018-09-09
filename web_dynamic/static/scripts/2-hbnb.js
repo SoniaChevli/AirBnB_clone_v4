@@ -14,4 +14,11 @@ $("document").ready(function() {
     amenityChecked.sort();
     $(".amenities h4").text(amenityChecked.join(", "));
   });
+  $.getJSON("http://0.0.0.0:5001/api/v1/status/", function(status) {
+    if (status.status === "OK") {
+      $("DIV#api_status").addClass("available");
+    } else {
+      $("DIV#api_status").removeClass("available");
+    }
+  });
 });
