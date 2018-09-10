@@ -12,16 +12,17 @@ $("document").ready(function() {
       }
     }
     amenityChecked.sort();
-    $(".amenities h4").text(amenityChecked.join(", "));
+    $(".amenities").text(amenityChecked.join(", "));
   });
-  $.getJSON("http://0.0.0.0:5001/api/v1/places_search", function(status, data) {
-    if (status.status === "OK") {
+
+  $.getJSON("http://0.0.0.0:5001/api/v1/places_search", function(data, status) {
+    if (data.status === "OK") {
       $("DIV#api_status").addClass("available");
     } else {
       $("DIV#api_status").removeClass("available");
     }
-    console.log("HERE", data);
   });
+
   $.ajax({
     url: "http://0.0.0.0:5001/api/v1/places_search",
     type: "POST",
@@ -29,6 +30,7 @@ $("document").ready(function() {
     contentType: "application/json",
     data: "{}",
     success: function(data) {
+      console.log("here");
       for (let place of data) {
         console.log("PLACE", place);
         $("SECTION.places").append(
